@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["adfarries@gmail.com"]
 
   spec.summary       = %q{Overly-opinionated test framework}
-  spec.description   = %q{Overly-opinionated test framework,t est-driven test framework}
+  spec.description   = %q{Overly-opinionated test framework,test-driven test framework}
   spec.homepage      = "https://github.com/cursande/caramello"
   spec.license       = "MIT"
 
