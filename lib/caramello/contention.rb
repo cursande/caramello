@@ -1,23 +1,13 @@
 module Caramello
-  module Contention
-    # TODO: Will eventually want to split out contention types into different
-    # classes within the Contention module
+  class Contention
+    # If a contention is true, it does not raise so the test is a pass
+    # TODO: refactor this to be a little more cohesive
+    def initialize(value)
+      @value = value
+    end
 
-    # usage: contend(a).will equal(b)
-    class ContendEquality
-      def initialize(a)
-        @a = a
-      end
-
-      def equal(b)
-        @b = b
-        @b == @a
-      end
-
-      def fail_message
-        "Contention: #{@b.inspect} \n
-         Result: #{@a.inspect}"
-      end
+    def to(matcher)
+      raise(matcher.fail_message) unless matcher.is_correct?(@value)
     end
   end
 end
