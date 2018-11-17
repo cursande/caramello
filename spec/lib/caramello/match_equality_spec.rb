@@ -2,7 +2,7 @@ require 'spec_helper'
 
 # TODO: Test the individual classes separately and then just an integration test
 # with the DSL?
-RSpec.describe Caramello::Contention::ContendEquality do
+RSpec.describe Caramello::Matcher::MatchEquality do
   subject { described_class }
 
   describe '#equal' do

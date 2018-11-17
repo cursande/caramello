@@ -9,5 +9,6 @@ module Caramello
       runner
       option_parser
       contention
+      matcher
     ].each { |lib| require_relative "./caramello/#{lib}" }
 end
