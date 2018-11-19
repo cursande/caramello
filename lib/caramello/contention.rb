@@ -1,13 +1,21 @@
+require 'pry'
+
 module Caramello
   class Contention
-    # If a contention is true, it does not raise so the test is a pass
-    # TODO: refactor this to be a little more cohesive
+
+    # Raised when an it block does not not meet the set condition.
+    # Inherit from StandardError so we can set the message when we
+    # raise
+    class ConditionNotMetError < StandardError; end
+
     def initialize(value)
       @value = value
     end
 
     def to(matcher)
-      raise(matcher.fail_message) unless matcher.is_correct?(@value)
+      return if matcher.condition_met?(@value)
+
+      raise ConditionNotMetError, matcher.fail_message
     end
   end
 end

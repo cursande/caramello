@@ -12,14 +12,14 @@ module Caramello
         @a = a
       end
 
-      def equal(b)
+      def condition_met?(b)
         @b = b
         @b == @a
       end
 
       # Maybe even something like "#{@a} did not equal #{@b}"?
       def fail_message
-        "Contention: #{@b.inspect} \n
+        "Expected Result: #{@b.inspect} \n
          Result: #{@a.inspect}"
       end
     end
