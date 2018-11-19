@@ -2,13 +2,10 @@ module Caramello
   module DSL
     class TestBehaviour
       def initialize(string, &block)
-
       end
 
-      def run_test
-        # test_behaviour 'behaviour' do
-
-        # end
+      def equal(value)
+        Caramello::Matcher::MatchEquality.new(value)
       end
     end
   end
