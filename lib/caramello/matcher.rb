@@ -17,10 +17,8 @@ module Caramello
         @b == @a
       end
 
-      # Maybe even something like "#{@a} did not equal #{@b}"?
       def fail_message
-        "Expected Result: #{@b.inspect} \n
-         Result: #{@a.inspect}"
+        "Predicted: #{@a.inspect}\nResult: #{@b.inspect}"
       end
     end
   end

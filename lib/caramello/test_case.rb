@@ -5,8 +5,8 @@ module Caramello
       @block = block
     end
 
-    def run(dsl)
-      dsl.instance_eval(&@block)
+    def run
+      Caramello::DSL.instance_eval(&@block)
     rescue ConditionNotMetError => fail_message
       {
         pass: false,
