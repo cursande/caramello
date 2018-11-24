@@ -10,5 +10,6 @@ module Caramello
       option_parser
       contention
       matcher
+      test_case
     ].each { |lib| require_relative "./caramello/#{lib}" }
 end
