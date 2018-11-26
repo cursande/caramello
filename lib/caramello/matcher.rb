@@ -1,8 +1,5 @@
 module Caramello
-  # Tried to be clever with the name, but this is what most other test
-  # frameworks seem to call it
   module Matcher
-
     # TODO: Muliple matcher classes will comprise the matcher module. This file
     # will end up just being a place to pull in these separate classes
 

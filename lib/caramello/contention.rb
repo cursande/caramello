@@ -16,7 +16,7 @@ module Caramello
 
     def to(matcher)
       valid_matcher?(matcher)
-      return if matcher.condition_met?(@value)
+      return true if matcher.condition_met?(@value)
 
       raise ConditionNotMetError, matcher.fail_message
     end

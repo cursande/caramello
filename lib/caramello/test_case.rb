@@ -6,11 +6,12 @@ module Caramello
     end
 
     def run
-      Caramello::DSL.instance_eval(&@block)
-    rescue ConditionNotMetError => fail_message
+      Caramello::Dsl.class_eval(&@block)
+      { pass: true }
+    rescue Contention::ConditionNotMetError => test_failure
       {
         pass: false,
-        message: fail_message
+        fail_message: test_failure.message
       }
     end
   end
