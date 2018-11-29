@@ -23,8 +23,8 @@ module Caramello
 
     def valid_matcher?(matcher)
       # TODO: Make this nicer
-      Caramello::Matcher.constants.each do |klass|
-        return if matcher.instance_of?(Caramello::Matcher.const_get(klass))
+      Matcher.constants.each do |klass|
+        return if matcher.instance_of?(Matcher.const_get(klass))
       end
 
       raise InvalidMatcherError, 'Matcher not recognised'
