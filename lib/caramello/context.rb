@@ -24,7 +24,7 @@ module Caramello
       # NOTE How to manage @test_cases where Dsl is a bunch of class methods??
       @test_cases.each do |test_case|
         result = test_case.run(Dsl.class_eval(&@block))
-        print test_case.desc + ' => ' +  (result.fetch(:pass) ? 'pass' : 'fail')
+        print test_case.desc + ' => ' +  (result.fetch(:pass) ? 'pass' : result.fetch(:fail_message))
       end
       @children.each(&:run)
     end
