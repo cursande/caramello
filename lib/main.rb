@@ -11,5 +11,6 @@ module Caramello
       contention
       matcher
       test_case
+      context
     ].each { |lib| require_relative "./caramello/#{lib}" }
 end
