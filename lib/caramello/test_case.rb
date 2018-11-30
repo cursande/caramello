@@ -1,5 +1,7 @@
 module Caramello
   class TestCase
+    attr_reader :desc
+
     def initialize(desc, &block)
       @desc = desc
       @block = block
