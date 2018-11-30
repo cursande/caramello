@@ -1,5 +1,3 @@
-require 'pry'
-
 module Caramello
   class Context
     # allows for nested contexts
