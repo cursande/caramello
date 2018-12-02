@@ -16,9 +16,7 @@ module Caramello
       @test_cases = []
     end
 
-    # TODO: How can I achieve this if I move test_case over to the Dsl class?
-    # Is there a way I can populate @test_cases while still calling test_case
-    # from Dsl?
+    # Delegating to Dsl for now
     def test_case(desc, &block)
       @test_cases.push(Dsl.test_case(desc, &block))
     end

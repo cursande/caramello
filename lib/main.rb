@@ -12,6 +12,7 @@ module Caramello
       matcher
       test_case
       context
+      formatter
     ].each { |lib| require_relative "./caramello/#{lib}" }
 
   class << self
