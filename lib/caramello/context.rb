@@ -26,7 +26,7 @@ module Caramello
     def run
       @test_cases.each do |test_case|
         result = test_case.run
-        puts test_case.desc + ' => ' +  (result.fetch(:pass) ? 'pass' : result.fetch(:fail_message))
+        Caramello.formatter.record(test_case, result)
       end
       @children.each(&:run)
     end

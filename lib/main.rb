@@ -12,12 +12,21 @@ module Caramello
       matcher
       test_case
       context
+      logger
       formatter
     ].each { |lib| require_relative "./caramello/#{lib}" }
 
   class << self
     def test_behaviour(desc, &block)
       @contexts.push(Context.setup(desc, &block))
+    end
+
+    def formatter
+      @formatter ||= Formatter.new(logger)
+    end
+
+    def logger
+      @logger ||= Logger.new
     end
 
     def run
