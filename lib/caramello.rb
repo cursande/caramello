@@ -4,10 +4,10 @@ require 'caramello/version'
 
 module Caramello
   %w[
+      cli
       dsl
       formatter
       runner
-      option_parser
       contention
       matcher
       test_case

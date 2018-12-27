@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'main'
+require 'caramello'
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
