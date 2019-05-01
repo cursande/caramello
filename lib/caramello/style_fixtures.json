@@ -1,0 +1,10 @@
+{
+    "rodney": {
+        "all_pass": "All my tests pass, still I get no respect",
+        "fail": "When I played in the sandbox, the cats kept covering me up"
+    },
+    "tsundere": {
+        "all_pass": "B-baka! I don't even care that your tests passed!",
+        "fail": "I finally believe in you, and this what you do? HOW COULD YOU!?"
+    }
+}
