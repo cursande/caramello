@@ -11,11 +11,13 @@ module Caramello
 
     def parse(args)
       OptionParser.new do |options|
-        options.on "-v", "--version" do
-          puts Caramello::VERSION
-        end
         options.on "-s", "--style" do |style|
           style = style
+        end
+
+        options.on_tail "-v", "--version" do
+          puts Caramello::VERSION
+          exit
         end
       end
 
