@@ -3,28 +3,31 @@ require 'optparse'
 module Caramello
   class CLI
 
-    def initialize(items)
-      parse(items)
+    def initialize(args)
+      parse(args)
     end
 
     private
 
-    def parse(items)
+    def parse(args)
       OptionParser.new do |options|
+        options.on "-v", "--version" do
+          puts Caramello::VERSION
+        end
         options.on "-s", "--style" do |style|
-          # Here we could set which YAML or JSON file we pull test responses from
+          style = style
         end
       end
 
-      spec_paths = items.select { |s| s.match?(/\A(.*).rb\Z/) }
-      run(spec_paths)
+      spec_paths = args.select { |s| s.match?(/\A(.*).rb\Z/) }
+      run(spec_paths, style)
     end
 
-    def run(spec_paths)
+    def run(spec_paths, style = nil)
       return if spec_paths.empty?
 
       #TODO: Write the runner!
-      Runner.new(spec_paths).run
+      Runner.new(spec_paths, style).run
     end
   end
 end

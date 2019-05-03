@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'caramello'
+Caramello::CLI.new(ARGV)
