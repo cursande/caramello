@@ -15,7 +15,7 @@ RSpec.describe Caramello::Context do
 
       it 'returns the test description and that it passed' do
         expect { context.run }
-          .to output(/4 squared returns 16 => pass/)
+          .to output(/4 squared returns 16 - ✔/)
           .to_stdout
       end
     end
