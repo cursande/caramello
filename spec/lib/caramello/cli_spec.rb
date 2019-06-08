@@ -43,8 +43,6 @@ RSpec.describe Caramello::CLI do
         subject.new(args)
       end
     end
-
-
   end
 
   context 'with a style option passed in as an argument' do
@@ -59,7 +57,7 @@ RSpec.describe Caramello::CLI do
 
     it 'prints the current version of Caramello to stdout' do
       expect(subject.new(args))
-        .to output(Regexp.quote(Caramello::VERSION))
+        .to output(Caramello::VERSION)
         .to_stdout
     end
   end
