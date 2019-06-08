@@ -3,33 +3,34 @@ require 'optparse'
 module Caramello
   class CLI
 
-    def initialize(args)
+    def initialize(args = Dir.glob['./**.*'])
       parse(args)
     end
 
     private
 
     def parse(args)
-      OptionParser.new do |options|
-        options.on "-s", "--style" do |style|
-          style = style
+      options = {}
+
+      OptionParser.new do |opt|
+        opt.on "-s", "--style" do |style_option|
+          options[:style] = style_option
         end
 
-        options.on_tail "-v", "--version" do
+        opt.on_tail "-v", "--version" do
           puts Caramello::VERSION
           exit
         end
       end
 
       spec_paths = args.select { |s| s.match?(/\A(.*).rb\Z/) }
-      run(spec_paths, style)
+      run(spec_paths, options)
     end
 
-    def run(spec_paths, style = nil)
+    def run(spec_paths, options = {})
       return if spec_paths.empty?
 
-      #TODO: Write the runner!
-      Runner.new(spec_paths, style).run
+      Runner.new(spec_paths, options).run
     end
   end
 end

@@ -1,5 +1,7 @@
 module Caramello
   class Context
+    attr_reader :children
+
     # allows for nested contexts
     def self.setup(description, parent = nil, &block)
       context = new(description, parent, &block)
@@ -17,11 +19,13 @@ module Caramello
     end
 
     # Delegating to Dsl for now
+    def explain(desc, &block)
+      Dsl.explain(desc, self, &block)
+    end
+
     def test_case(desc, &block)
       @test_cases.push(Dsl.test_case(desc, &block))
     end
-
-    attr_reader :desc
 
     def run
       @test_cases.each do |test_case|

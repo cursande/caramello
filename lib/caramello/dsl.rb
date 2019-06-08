@@ -2,7 +2,7 @@ module Caramello
   module Dsl
     class << self
       def explain(desc, parent = nil, &block)
-        Context.setup(desc, self, &block)
+        Context.setup(desc, parent, &block)
       end
 
       def test_case(desc, &block)

@@ -18,7 +18,7 @@ module Caramello
 
   class << self
     def test_behaviour(desc, &block)
-      @contexts.push(Context.setup(desc, &block))
+      contexts.push(Context.setup(desc, &block))
     end
 
     def formatter
