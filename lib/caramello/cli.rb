@@ -2,8 +2,7 @@ require 'optparse'
 
 module Caramello
   class CLI
-
-    def initialize(args = Dir.glob('./**.*'))
+    def initialize(args = Dir.glob('./**/*_test.rb'))
       parse(args)
     end
 
@@ -12,25 +11,37 @@ module Caramello
     def parse(args)
       options = {}
 
-      OptionParser.new do |opt|
-        opt.on "-s", "--style" do |style_option|
+      OptionParser.new do |parser|
+        parser.on '-s', '--style' do |style_option|
           options[:style] = style_option
         end
 
-        opt.on_tail "-v", "--version" do
+        parser.on_tail '-v', '--version' do
           puts Caramello::VERSION
           exit
         end
-      end
+      end.parse!(args)
 
-      test_paths = args.select { |s| s.match?(/\A(.*)_test.rb\Z/) }
+      test_paths = collect_test_files(args)
       run(test_paths, options)
     end
 
-    def run(test_paths, options = {})
-      return if spec_paths.empty?
+    # Return both file paths in args, and _test.rb files in
+    # directories in args
+    def collect_test_files(args)
+      args.each_with_object([]) do |arg, test_paths|
+        if File.file?(arg)
+          test_paths << arg
+        elsif File.directory?(arg)
+          test_paths << Dir.glob(arg + '/**/*_test.rb')
+        end
+      end.flatten
+    end
 
-      Runner.new(spec_paths, options).run
+    def run(test_paths, options = {})
+      return if test_paths.empty?
+
+      Runner.new(test_paths, options).run
     end
   end
 end

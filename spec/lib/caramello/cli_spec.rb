@@ -4,28 +4,26 @@ RSpec.describe Caramello::CLI do
   subject { described_class }
 
   context 'with no arguments passed' do
-    let(:args) { [] }
-
-    xit 'just runs the test cases with default options' do
+    it 'just runs the test cases with default options' do
       expect_any_instance_of(subject)
         .to receive(:run)
         .with([
-          './spec/lib/caramello/fixtures/passing_spec.rb',
-          './spec/lib/caramello/fixtures/failing_spec.rb'
+          './spec/lib/caramello/fixtures/passing_test.rb',
+          './spec/lib/caramello/fixtures/failing_test.rb'
         ], {})
 
-      subject.new(args)
+      subject.new
     end
   end
 
   context 'with a path provided' do
     context 'with a path to a file provided' do
-    let(:args) { ['./spec/lib/caramello/fixtures/passing_spec.rb'] }
+    let(:args) { ['./spec/lib/caramello/fixtures/passing_test.rb'] }
 
       it 'runs test cases within the file specified' do
         expect_any_instance_of(subject)
           .to receive(:run)
-          .with(['./spec/lib/caramello/fixtures/passing_spec.rb'], {})
+          .with(['./spec/lib/caramello/fixtures/passing_test.rb'], {})
 
         subject.new(args)
       end
@@ -34,12 +32,12 @@ RSpec.describe Caramello::CLI do
     context 'with a path to a directory provided' do
     let(:args) { ['./spec/lib/caramello/fixtures'] }
 
-      xit 'runs test cases within the directory specified' do
+      it 'runs test cases within the directory specified' do
         expect_any_instance_of(subject)
           .to receive(:run)
           .with([
-            './spec/lib/caramello/fixtures/passing_spec.rb',
-            './spec/lib/caramello/fixtures/failing_spec.rb'
+            './spec/lib/caramello/fixtures/passing_test.rb',
+            './spec/lib/caramello/fixtures/failing_test.rb'
           ], {})
 
         subject.new(args)
@@ -57,9 +55,12 @@ RSpec.describe Caramello::CLI do
   end
 
   context 'with the version passed in as an argument' do
-    let(:args) { '-v' }
+    let(:args) { ['-v'] }
 
-    xit 'prints the current version of Caramello to stdout' do
+    it 'prints the current version of Caramello to stdout' do
+      expect(subject.new(args))
+        .to output(Regexp.quote(Caramello::VERSION))
+        .to_stdout
     end
   end
 end
