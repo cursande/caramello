@@ -39,7 +39,7 @@ module Caramello
     end
 
     def run(test_paths, options = {})
-      return if test_paths.empty?
+      puts "No Caramello tests found!" and exit if test_paths.empty?
 
       Runner.new(test_paths, options).run
     end

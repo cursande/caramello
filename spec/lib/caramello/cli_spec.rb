@@ -18,7 +18,7 @@ RSpec.describe Caramello::CLI do
 
   context 'with a path provided' do
     context 'with a path to a file provided' do
-    let(:args) { ['./spec/lib/caramello/fixtures/passing_test.rb'] }
+      let(:args) { ['./spec/lib/caramello/fixtures/passing_test.rb'] }
 
       it 'runs test cases within the file specified' do
         expect_any_instance_of(subject)
@@ -30,7 +30,7 @@ RSpec.describe Caramello::CLI do
     end
 
     context 'with a path to a directory provided' do
-    let(:args) { ['./spec/lib/caramello/fixtures'] }
+      let(:args) { ['./spec/lib/caramello/fixtures'] }
 
       it 'runs test cases within the directory specified' do
         expect_any_instance_of(subject)
@@ -45,6 +45,16 @@ RSpec.describe Caramello::CLI do
     end
   end
 
+  context 'when no test files are found' do
+    let(:args) { ['./spec/lib/caramello/fixtures/foo'] }
+
+    it 'exits, with output declaring no tests were found' do
+      expect{ subject.new(args) }
+        .to output("No Caramello tests found!\n")
+        .to_stdout
+    end
+  end
+
   context 'with a style option passed in as an argument' do
     let(:args) { ['test_dir/','-s', 'rodney'] }
 
@@ -56,7 +66,7 @@ RSpec.describe Caramello::CLI do
     let(:args) { ['-v'] }
 
     it 'prints the current version of Caramello to stdout' do
-      expect(subject.new(args))
+      expect{ subject.new(args) }
         .to output(Caramello::VERSION)
         .to_stdout
     end
