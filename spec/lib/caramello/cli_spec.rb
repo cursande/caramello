@@ -50,13 +50,14 @@ RSpec.describe Caramello::CLI do
 
     it 'exits, with output declaring no tests were found' do
       expect{ subject.new(args) }
-        .to output("No Caramello tests found!\n")
+        .to raise_error(SystemExit)
+        .and output("No Caramello tests found!\n")
         .to_stdout
     end
   end
 
   context 'with a style option passed in as an argument' do
-    let(:args) { ['test_dir/','-s', 'rodney'] }
+    let(:args) { ['./spec/lib/caramello/fixtures/passing_test.rb','-s', 'rodney'] }
 
     xit 'applies the style option when formatting stdout' do
     end
@@ -67,7 +68,8 @@ RSpec.describe Caramello::CLI do
 
     it 'prints the current version of Caramello to stdout' do
       expect{ subject.new(args) }
-        .to output(Caramello::VERSION)
+        .to raise_error(SystemExit)
+        .and output("#{Caramello::VERSION}\n")
         .to_stdout
     end
   end

@@ -17,8 +17,7 @@ module Caramello
         end
 
         parser.on_tail '-v', '--version' do
-          puts Caramello::VERSION
-          exit
+          puts Caramello::VERSION; exit
         end
       end.parse!(args)
 
@@ -39,7 +38,7 @@ module Caramello
     end
 
     def run(test_paths, options = {})
-      puts "No Caramello tests found!" and exit if test_paths.empty?
+      puts "No Caramello tests found!"; exit if test_paths.empty?
 
       Runner.new(test_paths, options).run
     end
