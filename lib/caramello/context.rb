@@ -18,13 +18,14 @@ module Caramello
       @test_cases = []
     end
 
-    # Delegating to Dsl for now
+    # TODO: This is just a mess, the whole DSL module needs
+    # a complete rethink
     def explain(desc, &block)
-      Dsl.explain(desc, self, &block)
+      DSL.explain(desc, self, &block)
     end
 
     def test_case(desc, &block)
-      @test_cases.push(Dsl.test_case(desc, &block))
+      @test_cases.push(DSL.test_case(desc, &block))
     end
 
     def run

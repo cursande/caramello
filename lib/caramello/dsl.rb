@@ -1,5 +1,5 @@
 module Caramello
-  module Dsl
+  module DSL
     class << self
       def explain(desc, parent = nil, &block)
         Context.setup(desc, parent, &block)

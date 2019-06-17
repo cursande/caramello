@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 # Is it even worth testing this??
-RSpec.describe Caramello::Dsl do
+RSpec.describe Caramello::DSL do
   subject { described_class }
 
   context 'with a passing test' do

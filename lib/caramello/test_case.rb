@@ -8,7 +8,7 @@ module Caramello
     end
 
     def run
-      Dsl.class_eval(&@block)
+      DSL.class_eval(&@block)
       { pass: true }
     rescue Contention::ConditionNotMetError => test_failure
       {
