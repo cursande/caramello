@@ -1,0 +1,6 @@
+---
+style:
+  success:
+    - All my tests pass, still I get no respect!
+  failure:
+    - When I played in the sandbox, the cats kept covering me up, I tell ya...
