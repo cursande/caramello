@@ -12,7 +12,9 @@ module Caramello
       options = {}
 
       OptionParser.new do |parser|
-        parser.on '-s', '--style' do |style_option|
+        parser.on '-sSTYLE', '--style=STYLE' do |style_option|
+          bail_unless_style_exists?(style_option)
+
           options[:style] = style_option
         end
 
@@ -23,6 +25,10 @@ module Caramello
 
       test_paths = collect_test_files(args)
       run(test_paths, options)
+    end
+
+    def bail_unless_style_exists?(style_option)
+      puts "style option '#{style_option}' not found!" unless File.exists?("styles/#{style_option}.yml")
     end
 
     # Return both file paths in args, and _test.rb files in

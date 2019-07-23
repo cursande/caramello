@@ -14,6 +14,7 @@ module Caramello
       context
       logger
       formatter
+      counter
     ].each { |lib| require_relative "./caramello/#{lib}" }
 
   class << self
@@ -29,8 +30,8 @@ module Caramello
       @logger ||= Logger.new
     end
 
-    def run
-      contexts.each(&:run)
+    def run(counter)
+      contexts.each { |cxt| cxt.run(counter) }
     end
 
     private

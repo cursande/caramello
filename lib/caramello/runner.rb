@@ -1,17 +1,18 @@
 module Caramello
   class Runner
-
-    def initialize(paths, style)
+    def initialize(paths, options)
       @paths = paths
-      @style = style
+      @style = options[:style]
+      @counter = Counter.new
     end
 
     def run
       @paths.each do |path|
         load(path)
       end
-
-      Caramello.run
+      # TODO: Feels clunky having to pass in the counter here, and to each context...
+      Caramello.run(@counter)
+      Caramello.formatter.review(@counter, @style)
     end
   end
 end

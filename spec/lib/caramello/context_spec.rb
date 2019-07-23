@@ -2,6 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Caramello::Context do
   subject { described_class }
+  let(:counter) { Caramello::Counter.new }
 
   describe '.setup' do
     context 'with a one-level nested context' do
@@ -14,9 +15,11 @@ RSpec.describe Caramello::Context do
       end
 
       it 'returns the test description and that it passed' do
-        expect { context.run }
-          .to output(/4 squared returns 16 - ✔/)
-          .to_stdout
+        expect_any_instance_of(Caramello::Logger)
+          .to receive(:log)
+          .with("4 squared returns 16 - ✔")
+
+        context.run(counter)
       end
     end
   end

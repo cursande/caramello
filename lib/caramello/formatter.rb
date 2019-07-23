@@ -1,3 +1,5 @@
+require 'yaml'
+
 module Caramello
   class Formatter
     def initialize(logger)
@@ -17,6 +19,15 @@ module Caramello
     def explain(context)
       @logger.log(context.desc)
       yield
+    end
+
+    def review(counter, style)
+      style_options = YAML.load_file("styles/#{style}.yml").fetch('style')
+
+      result = counter.count < 1 ? 'success' : 'failure'
+      message = style_options.fetch(result).sample
+
+      @logger.log(message)
     end
   end
 end

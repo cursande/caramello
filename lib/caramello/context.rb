@@ -28,12 +28,14 @@ module Caramello
       @test_cases.push(DSL.test_case(desc, &block))
     end
 
-    def run
+    def run(counter)
       @test_cases.each do |test_case|
         result = test_case.run
+
+        counter.increment! unless result.fetch(:pass)
         Caramello.formatter.record(test_case, result)
       end
-      @children.each(&:run)
+      @children.each { |cxt| cxt.run(counter) }
     end
   end
 end
