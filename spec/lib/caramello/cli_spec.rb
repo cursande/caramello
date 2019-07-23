@@ -1,9 +1,12 @@
 require 'spec_helper'
 
+# TODO: This tests the cli interface but I still need a proper end-to-end test
 RSpec.describe Caramello::CLI do
   subject { described_class }
 
   context 'with no arguments passed' do
+    let(:args) { [] }
+
     it 'just runs the test cases with default options' do
       expect_any_instance_of(subject)
         .to receive(:run)
@@ -49,7 +52,7 @@ RSpec.describe Caramello::CLI do
     let(:args) { ['./spec/lib/caramello/fixtures/foo'] }
 
     it 'exits, with output declaring no tests were found' do
-      expect{ subject.new(args) }
+      expect { subject.new(args) }
         .to raise_error(SystemExit)
         .and output("No Caramello tests found!\n")
         .to_stdout
@@ -59,7 +62,15 @@ RSpec.describe Caramello::CLI do
   context 'with a style option passed in as an argument' do
     let(:args) { ['./spec/lib/caramello/fixtures/passing_test.rb','-s', 'rodney'] }
 
-    xit 'applies the style option when formatting stdout' do
+    it 'applies the style option when formatting stdout' do
+      expect_any_instance_of(subject)
+        .to receive(:run)
+        .with(
+          ['./spec/lib/caramello/fixtures/passing_test.rb'],
+          { style: 'rodney' }
+        )
+
+      subject.new(args)
     end
   end
 
