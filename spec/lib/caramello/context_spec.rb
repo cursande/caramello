@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Caramello::Context do
   subject { described_class }
-  let(:counter) { Caramello::Counter.new }
+  let(:fail_count) { 0 }
 
   describe '.setup' do
     context 'with a one-level nested context' do
@@ -19,7 +19,7 @@ RSpec.describe Caramello::Context do
           .to receive(:log)
           .with("4 squared returns 16 - ✔")
 
-        context.run(counter)
+        context.run(fail_count)
       end
     end
   end

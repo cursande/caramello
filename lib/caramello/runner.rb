@@ -3,16 +3,16 @@ module Caramello
     def initialize(paths, options)
       @paths = paths
       @style = options[:style]
-      @counter = Counter.new
+      @fail_count = 0
     end
 
     def run
       @paths.each do |path|
         load(path)
       end
-      # TODO: Feels clunky having to pass in the counter here, and to each context...
-      Caramello.run(@counter)
-      Caramello.formatter.review(@counter, @style)
+
+      Caramello.run(@fail_count)
+      Caramello.formatter.review(@fail_count, @style)
     end
   end
 end

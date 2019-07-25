@@ -21,10 +21,10 @@ module Caramello
       yield
     end
 
-    def review(counter, style)
+    def review(fail_count, style)
       style_options = YAML.load_file("styles/#{style}.yml").fetch('style')
 
-      result = counter.count < 1 ? 'success' : 'failure'
+      result = fail_count < 1 ? 'success' : 'failure'
       message = style_options.fetch(result).sample
 
       @logger.log(message)
